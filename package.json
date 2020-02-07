@@ -1,0 +1,24 @@
+{
+    "name": "ngxmomo",
+    "version": "0.0.1",
+    "author": {
+        "name": "Linus Nowomukama",
+        "email": "ugsalons@gmail.com",
+        "url": "https://github.com/linlak"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/linlak/ngxmomo.git"
+    },
+    "license": "MIT",
+    "keywords": [
+        "momo widget",
+        "momo api",
+        "mtn api",
+        "mobile money payment"
+    ],
+    "peerDependencies": {
+        "@angular/common": "^8.2.14",
+        "@angular/core": "^8.2.14"
+    }
+}
