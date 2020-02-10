@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NGXMomoComponent } from './ngxmomo.component';
+import { NgxMomoComponent } from './ngxmomo.component';
 
 describe('NGXMomoComponent', () => {
-  let component: NGXMomoComponent;
-  let fixture: ComponentFixture<NGXMomoComponent>;
+  let component: NgxMomoComponent;
+  let fixture: ComponentFixture<NgxMomoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NGXMomoComponent ]
+      declarations: [ NgxMomoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NGXMomoComponent);
+    fixture = TestBed.createComponent(NgxMomoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

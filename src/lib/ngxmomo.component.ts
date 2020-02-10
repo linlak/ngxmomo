@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxMomoService } from './ngxmomo.service';
 
 @Component({
   selector: 'momo-ngxmomo',
@@ -9,9 +10,9 @@ import { Component, OnInit } from '@angular/core';
   `,
   styles: []
 })
-export class NGXMomoComponent implements OnInit {
+export class NgxMomoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private momo: NgxMomoService) { }
 
   ngOnInit() {
   }

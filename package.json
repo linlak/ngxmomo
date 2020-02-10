@@ -1,6 +1,7 @@
 {
-    "name": "ngxmomo",
-    "version": "0.0.1",
+    "name": "@linlak/ngxmomo",
+    "version": "1.0.1",
+    "description": "This is an angular library for connecting with MTN Momo Api",
     "author": {
         "name": "Linus Nowomukama",
         "email": "ugsalons@gmail.com",
@@ -10,12 +11,20 @@
         "type": "git",
         "url": "https://github.com/linlak/ngxmomo.git"
     },
+    "bugs": {
+        "url": "https://github.com/linlak/ngxmomo/issues"
+    },
     "license": "MIT",
     "keywords": [
         "momo widget",
         "momo api",
         "mtn api",
-        "mobile money payment"
+        "mobile money payment",
+        "momo angular",
+        "momo umd",
+        "mtn momo angular",
+        "linus",
+        "linus nowomukama"
     ],
     "peerDependencies": {
         "@angular/common": "^8.2.14",
