@@ -3,6 +3,7 @@ import { NgxMomoComponent } from './ngxmomo.component';
 import { NgxMomoServiceConfig } from './data';
 import { NgxMomoService } from './ngxmomo.service';
 import { MomoBottonComponent } from './components/momo-button.component';
+import { MomoQrpaymentComponent } from './components/momo-qrpayment.component';
 
 
 
@@ -10,31 +11,27 @@ import { MomoBottonComponent } from './components/momo-button.component';
   declarations: [
     NgxMomoComponent,
     MomoBottonComponent,
+    MomoQrpaymentComponent,
   ],
   imports: [
   ],
   exports: [
     NgxMomoComponent,
     MomoBottonComponent,
+    MomoQrpaymentComponent,
   ]
 })
 export class NgxMomoModule {
   private static alreadCalled = false;
   constructor(@Optional() @SkipSelf() parentModule?: NgxMomoModule) {
-    console.log('NgxMomoModule');
     if (parentModule) {
-        console.log('NgxMomoModule is called more than once');
         NgxMomoModule.alreadCalled = true;
       }
   }
 
   /**
    * the forRoot function is used to initialize the momo library in the root module i.e AppModule
-   * const momoConfig = new NgxMomoServiceConfig({
-   *                      apiUserId: 'your apiUserId',
-   *                      environ: 'sandbox', // can be 'sandbox' or 'live'
-   *                      currency: 'EUR', // the currency supported by platiform api and your api settings
-   *                    });
+   * const momoConfig = new NgxMomoServiceConfig();
    *
    * import: [
    *  .............
@@ -45,7 +42,6 @@ export class NgxMomoModule {
    */
 
   static forRoot(config: NgxMomoServiceConfig): ModuleWithProviders {
-    console.log('NgxMomoModule forRoot');
     if (NgxMomoModule.alreadCalled) {
       return;
     }

@@ -2,24 +2,31 @@ import { Injectable } from '@angular/core';
 import { NgxMomoServiceConfig, MomoEvent } from './data';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { MomoProvider } from './entities/momo-provider';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NgxMomoService {
-
-  private momoConfig: NgxMomoServiceConfig;
-  private initialized: false;
-  private requestToPayUrl = '';
+  private providers: Map<string, MomoProvider>;
   private momoEvent: BehaviorSubject<MomoEvent|null> = new BehaviorSubject(null);
 
   constructor(config: NgxMomoServiceConfig, private http: HttpClient) {
-    this.momoConfig = config;
+    this.providers = config.getProviders();
+    this.providers.forEach((provider: MomoProvider, key: string) => {
+      provider.initialize().then(r => {
+      })
+      .catch(error => {
+      });
+    });
    }
 
    public listen(): Observable<MomoEvent|null> {
      return this.momoEvent.asObservable();
+   }
+
+   public getProvider(tagName: string) {
+     return this.providers.get(tagName);
    }
    private httpHeaders() {
      const httpOptions = {
@@ -30,12 +37,7 @@ export class NgxMomoService {
      return httpOptions;
    }
 
-   public requestToPay(data: any): void {
-     const req = this.http.post(this.requestToPayUrl, data, this.httpHeaders()).pipe(
-       map((data: any) => data)
-     );
-   }
    public notify(eventName: string, eventDetails: any): void {
-     this.momoEvent.next({name: eventName, details: eventDetails});
+     this.momoEvent.next({type: eventName, details: eventDetails});
    }
 }

@@ -1,16 +1,34 @@
+import { MomoProvider, MtnMomoConfig } from '../entities/momo-provider';
+import { MomoWidgetProvider } from '../providers/momo-widget-privider';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { MomoEvent } from './momo-events';
 
-export type MomoEnvironments = 'sandbox' | 'live';
+export interface NgxMomoServiceConfigItem {
+    provider: MomoProvider;
+}
 export class NgxMomoServiceConfig {
-    apiUserId: string;
-    environ: MomoEnvironments;
-    currency: string;
-    constructor(config: {
-        apiUserId: string,
-        environ?: MomoEnvironments,
-        currency?: string,
-    }) {
-        this.apiUserId = config.apiUserId;
-        this.environ = config.environ || 'sandbox';
-        this.currency = config.currency || 'EUR';
+    private providers: Map<string, MomoProvider> = new Map<string, MomoProvider>();
+    constructor(providers?: NgxMomoServiceConfigItem[]) {
+
+        if (providers) {
+            // tslint:disable-next-line: prefer-for-of
+            for (let i = 0; i < providers.length; i++) {
+                const element = providers[i];
+                this.providers.set(element.provider.TYPE, element.provider);
+            }
+        }
+    }
+    getProviders() {
+        return this.providers;
+    }
+    private addProvider(provider: MomoProvider) {
+        if (!this.providers.get(provider.TYPE)) {
+            this.providers.set(provider.TYPE, provider);
+        }
+    }
+
+    public addMomoWidgetProvider(config: MtnMomoConfig) {
+        this.addProvider(new MomoWidgetProvider(config));
+        return this;
     }
 }

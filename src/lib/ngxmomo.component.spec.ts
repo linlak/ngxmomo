@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NgxMomoComponent } from './ngxmomo.component';
 
-describe('NGXMomoComponent', () => {
+describe('NgxMomoComponent', () => {
   let component: NgxMomoComponent;
   let fixture: ComponentFixture<NgxMomoComponent>;
 
