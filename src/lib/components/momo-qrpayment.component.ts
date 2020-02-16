@@ -1,4 +1,4 @@
-import { OnInit, OnDestroy, Component, Input } from '@angular/core';
+import { OnInit, OnDestroy, Component, Input, Output, EventEmitter } from '@angular/core';
 import { NgxMomoService } from '../ngxmomo.service';
 import { Subscription } from 'rxjs';
 import { MomoProvider } from '../entities/momo-provider';
@@ -25,7 +25,6 @@ import { MomoEvent } from '../data';
 export class MomoQrpaymentComponent implements OnInit, OnDestroy {
     @Input() externalId?: string;
     @Input() amount?: number;
-    private momoListener: Subscription;
     private momoProvider: MomoProvider| null;
     apiUserId: string;
     currency: string;
@@ -38,17 +37,7 @@ export class MomoQrpaymentComponent implements OnInit, OnDestroy {
         this.currency = this.momoProvider.getCurrency();
     }
     ngOnInit() {
-        this.momoListener = this.momoProvider.listen().subscribe((r: MomoEvent) => {
-            if (r) {
-               console.log(r);
-            }
-        });
     }
     ngOnDestroy() {
-        this.momoListener.unsubscribe();
-    }
-
-    performRequest() {
-        this.momo.notify('created', {});
     }
 }

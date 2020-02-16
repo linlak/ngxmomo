@@ -9,7 +9,6 @@ import { MomoProvider } from './entities/momo-provider';
 })
 export class NgxMomoService {
   private providers: Map<string, MomoProvider>;
-  private momoEvent: BehaviorSubject<MomoEvent|null> = new BehaviorSubject(null);
 
   constructor(config: NgxMomoServiceConfig, private http: HttpClient) {
     this.providers = config.getProviders();
@@ -21,23 +20,7 @@ export class NgxMomoService {
     });
    }
 
-   public listen(): Observable<MomoEvent|null> {
-     return this.momoEvent.asObservable();
-   }
-
    public getProvider(tagName: string) {
      return this.providers.get(tagName);
-   }
-   private httpHeaders() {
-     const httpOptions = {
-       headers: new HttpHeaders({
-         'Content-Type': 'application/json',
-       })
-     };
-     return httpOptions;
-   }
-
-   public notify(eventName: string, eventDetails: any): void {
-     this.momoEvent.next({type: eventName, details: eventDetails});
    }
 }

@@ -2,6 +2,7 @@ import { BaseMomoProvider } from '../entities/base-momo-provider';
 import { MomoProviderClass, MtnMomoConfig } from '../entities/momo-provider';
 import { MomoEvent } from '../data';
 import { map } from 'rxjs/operators';
+import { MomoService } from '../momo.service';
 
 declare let mobileMoneyReinitializeWidgets: any;
 export class MomoWidgetProvider extends BaseMomoProvider {
@@ -11,7 +12,7 @@ export class MomoWidgetProvider extends BaseMomoProvider {
 
     public momoProviderObj: MomoProviderClass = new MomoProviderClass();
 
-    constructor(config: MtnMomoConfig) {
+    constructor(config: MtnMomoConfig, private momo: MomoService) {
         super();
         this.momoConfig =  config;
         this.momoProviderObj.name = 'mtnmomowidget';
@@ -23,16 +24,40 @@ export class MomoWidgetProvider extends BaseMomoProvider {
         return new Promise((resolve, reject) => {
             this.loadScript(this.momoProviderObj, () => {
                 window.addEventListener('mobile-money-qr-payment-created', (e) => {
-                    console.log('mobile-money-qr-payment-created', e);
+                    this.momo.notify({
+                        provider: this.TYPE,
+                        event: {
+                            type: 'mobile-money-qr-payment-created',
+                            details: e
+                        }
+                    });
                 });
                 window.addEventListener('mobile-money-qr-payment-canceled', e => {
-                    console.log('mobile-money-qr-payment-canceled', e);
+                    this.momo.notify({
+                        provider: this.TYPE,
+                        event: {
+                            type: 'mobile-money-qr-payment-canceled',
+                            details: e
+                        }
+                    });
                 });
                 window.addEventListener('mobile-money-qr-payment-successful', e => {
-                    console.log('mobile-money-qr-payment-successful', e);
+                    this.momo.notify({
+                        provider: this.TYPE,
+                        event: {
+                            type: 'mobile-money-qr-payment-successful',
+                            details: e
+                        }
+                    });
                 });
                 window.addEventListener('mobile-money-qr-payment-failed', e => {
-                    console.log('mobile-money-qr-payment-failed', e);
+                    this.momo.notify({
+                        provider: this.TYPE,
+                        event: {
+                            type: 'mobile-money-qr-payment-failed',
+                            details: e
+                        }
+                    });
                 });
 
                 mobileMoneyReinitializeWidgets();

@@ -1,23 +1,18 @@
 import { NgModule, ModuleWithProviders, Optional, SkipSelf } from '@angular/core';
-import { NgxMomoComponent } from './ngxmomo.component';
 import { NgxMomoServiceConfig } from './data';
 import { NgxMomoService } from './ngxmomo.service';
-import { MomoBottonComponent } from './components/momo-button.component';
 import { MomoQrpaymentComponent } from './components/momo-qrpayment.component';
+import { MomoService } from './momo.service';
 
 
 
 @NgModule({
   declarations: [
-    NgxMomoComponent,
-    MomoBottonComponent,
     MomoQrpaymentComponent,
   ],
   imports: [
   ],
   exports: [
-    NgxMomoComponent,
-    MomoBottonComponent,
     MomoQrpaymentComponent,
   ]
 })
@@ -49,6 +44,7 @@ export class NgxMomoModule {
       ngModule: NgxMomoModule,
       providers: [
         NgxMomoService,
+        MomoService,
         {
           provide: NgxMomoServiceConfig,
           useValue: config
