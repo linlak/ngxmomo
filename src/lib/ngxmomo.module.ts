@@ -2,7 +2,6 @@ import { NgModule, ModuleWithProviders, Optional, SkipSelf } from '@angular/core
 import { NgxMomoServiceConfig } from './data';
 import { NgxMomoService } from './ngxmomo.service';
 import { MomoQrpaymentComponent } from './components/momo-qrpayment.component';
-import { MomoService } from './momo.service';
 
 
 
@@ -44,7 +43,6 @@ export class NgxMomoModule {
       ngModule: NgxMomoModule,
       providers: [
         NgxMomoService,
-        MomoService,
         {
           provide: NgxMomoServiceConfig,
           useValue: config

@@ -31,7 +31,8 @@ After all the dependencies have been installed, it is now time to add our NgxMom
 				.addMomoWidgetProvider({
       				apiUserId: 'b12d7b22-3057-4c8e-ad50-63904171d18c',
       				environ: 'sandbox',
-      				currency: 'EUR'
+      				currency: 'EUR',
+					// url: 'your production url', // optional should be used in production production environment
     			});
 	// OR
 	/*
@@ -40,7 +41,8 @@ After all the dependencies have been installed, it is now time to add our NgxMom
     			new MomoWidgetProvider({
       				apiUserId: 'b12d7b22-3057-4c8e-ad50-63904171d18c',
       				environ: 'sandbox',
-      				currency: 'EUR'
+      				currency: 'EUR',
+					// url: 'your production url', // optional should be used in production production environment
     			}),
   			]);
 	*/
@@ -108,4 +110,41 @@ Let us take an example from the momo demo page
 	    </div>
 	</div>
 	
+
+**Subscribe to event**
+
+To listen to the event from the service you will create your servce as follows
+
+**invoice.service.ts**
+
+	import { Injectable } from '@angular/core';
+	import { NgxMomoService } from '@linlak/ngxmomo';
 	
+	@Injectable({
+	    providedIn: 'root'
+	})
+	export class InvoiceService {
+	    constructor(private momo: NgxMomoService) {
+	        this.momo.listen().subscribe(r => console.log(r));
+	    }
+	}	
+
+
+Finally we import our InvoiceService into AppComponent
+
+**app.component.ts**
+
+	import { Component } from '@angular/core';
+	import { InvoiceService } from './invoice.service';
+	
+	@Component({
+	  selector: 'momo-root',
+	  templateUrl: './app.component.html',
+	  styleUrls: ['./app.component.scss']
+	})
+	export class AppComponent {
+	  constructor(public invoiceService: InvoiceService) {}
+	}
+
+## Bulk SMS Services ##
+You can send bulk sms [LinSMS](https://lin-sms.com)

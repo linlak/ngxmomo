@@ -1,14 +1,15 @@
-import { Observable } from 'rxjs';
-import { MomoEvent } from '../data';
+import { BehaviorSubject } from 'rxjs';
+import { MomoEventMain } from '../data';
 
 export type MomoEnvironments = 'sandbox' | 'live';
 export interface MomoProvider {
     TYPE: string;
-    initialize(): Promise<any>;
-    listen(): Observable<MomoEvent>;
+    eventCallback: any;
+    initialize(eventCallback: any): Promise<any>;
     loadScript(obj: MomoProviderClass, onload: any): void;
     getApiUser(): string;
     getCurrency(): string;
+    notify(event: CustomEvent): void;
 }
 
 export interface MtnMomoConfig {

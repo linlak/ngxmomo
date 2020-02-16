@@ -1,6 +1,6 @@
 {
     "name": "@linlak/ngxmomo",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "This is an angular library for connecting with MTN Momo Api",
     "author": {
         "name": "Linus Nowomukama",
@@ -28,6 +28,7 @@
     ],
     "peerDependencies": {
         "@angular/common": "^8.2.14",
-        "@angular/core": "^8.2.14"
+        "@angular/core": "^8.2.14",
+        "rxjs": "^6.5.4"
     }
 }

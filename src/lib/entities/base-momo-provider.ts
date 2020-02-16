@@ -1,12 +1,12 @@
 import { MomoProvider, MomoProviderClass } from './momo-provider';
-import { MomoEvent } from '../data';
-import { Observable, Subject } from 'rxjs';
+import {  MomoEventMain } from '../data';
+import {  BehaviorSubject } from 'rxjs';
 
 export abstract class BaseMomoProvider implements MomoProvider {
-    private eventListener: Subject<MomoEvent> = new Subject<MomoEvent>();
+    eventCallback: any;
     constructor() {}
     abstract TYPE: string;
-    abstract initialize(): Promise<any>;
+    abstract initialize(eventCallback: any): Promise<any>;
     abstract getApiUser(): string;
     abstract getCurrency(): string;
     public loadScript(obj: MomoProviderClass, onload: any): void {
@@ -21,10 +21,13 @@ export abstract class BaseMomoProvider implements MomoProvider {
 
         document.head.appendChild(momoJs);
     }
-    public notify(eventName: string, eventDetails: any): void {
-        this.eventListener.next({type: eventName, details: eventDetails});
-    }
-    public listen(): Observable<MomoEvent> {
-        return this.eventListener.asObservable();
+    public notify(eventDetails: CustomEvent): void {
+        this.eventCallback({
+            provider: this.TYPE,
+            event: {
+                type: eventDetails.type,
+                details: eventDetails.detail
+            }
+        });
     }
 }
